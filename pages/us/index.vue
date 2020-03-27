@@ -6,7 +6,7 @@
       <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
         <div class="m-2 text-white bg-green-900 shadow-lg">
           <h3>
-            Positive
+            Positive Tests
           </h3>
           <div class="text-4xl">
             {{ stats.positive.toLocaleString() }}
@@ -17,7 +17,7 @@
       <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
         <div class="m-2 text-white bg-red-800 shadow-lg">
           <h3>
-            Negative
+            Negative Tests
           </h3>
           <div class="text-4xl">
             {{ stats.negative.toLocaleString() }}
@@ -28,7 +28,7 @@
       <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
         <div class="m-2 text-white bg-blue-900 shadow-lg">
           <h3>
-            Total
+            Total Tests
           </h3>
           <div class="text-4xl">
             {{ stats.totalTestResults.toLocaleString() }}
