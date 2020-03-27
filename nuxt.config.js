@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   mode: 'universal',
   /*
@@ -43,18 +45,13 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/pwa'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {
-    debug: false,
-    proxy: false
-  },
+  axios: {},
   /*
    ** Build configuration
    */
@@ -63,5 +60,16 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  generate: {
+    routes() {
+      return axios
+        .get('https://covidtracking.com/api/states/info')
+        .then((result) => {
+          return result.data.map((state) => {
+            return '/us/' + state.state
+          })
+        })
+    }
   }
 }
