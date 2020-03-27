@@ -52,7 +52,8 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    debug: true
+    debug: false,
+    proxy: false
   },
   /*
    ** Build configuration

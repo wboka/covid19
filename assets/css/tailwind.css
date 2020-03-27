@@ -24,3 +24,11 @@ a:hover {
 hr {
   @apply my-4;
 }
+
+.state-link {
+  @apply bg-orange-200 text-black border-2 border-orange-200 p-4 rounded-lg m-4 shadow-lg block no-underline;
+}
+
+.state-link:hover {
+  @apply bg-orange-800 text-white border-orange-800 shadow-none;
+}
