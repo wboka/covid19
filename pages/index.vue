@@ -18,11 +18,6 @@
 
 <script>
 export default {
-  head() {
-    return {
-      title: 'Dashboard'
-    }
-  },
   data() {
     return {
       countries: [
@@ -31,6 +26,11 @@ export default {
           name: 'United States of America'
         }
       ]
+    }
+  },
+  head() {
+    return {
+      title: 'Dashboard'
     }
   }
 }
