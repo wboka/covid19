@@ -83,6 +83,16 @@ export default {
     )
     const { data: stats } = await axios.get('https://covidtracking.com/api/us')
 
+    availableStates.sort((a, b) => {
+      const state1 = a.name.toLowerCase()
+      const state2 = b.name.toLowerCase()
+
+      if (state1 < state2) return -1
+      if (state1 > state2) return 1
+
+      return 0
+    })
+
     return {
       stats: stats[0],
       states: availableStates

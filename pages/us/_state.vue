@@ -263,12 +263,26 @@ export default {
 
       return this.dailyStats.map((stat) => {
         return {
-          t: new Date(that.makeDate(stat.date)),
+          t: that.makeISODate(stat.date),
           y: stat[field]
         }
       })
     },
+    makeISODate(date) {
+      const dateAsString = date.toString()
+
+      // YYYYMMDD to YYYY-MM-DD
+      return new Date(
+        dateAsString.substring(0, 4),
+        dateAsString.substring(4, 6) - 1,
+        dateAsString.substring(6, 8),
+        0,
+        0
+      )
+    },
     makeDate(date) {
+      if (!date) return 'Unknown Date'
+
       const dateAsString = date.toString()
 
       // YYYYMMDD
