@@ -5,7 +5,7 @@
         >United States of America</nuxt-link
       >
 
-      <h2>{{ state }}</h2>
+      <h2>{{ info.name }}</h2>
 
       <p>
         Last checked:
@@ -17,7 +17,11 @@
         <em>{{ format(new Date(stats.dateModified), dateFormat) }}</em>
       </p>
 
-      <h3>Data Quality - {{ stats.grade }}</h3>
+      <h3>Data Quality - {{ stats.grade ? stats.grade : 'NA' }}</h3>
+
+      <p class="text-gray-600 text-center">
+        Percentages calculated from total test results
+      </p>
     </div>
 
     <div class="flex flex-wrap text-center">
@@ -29,6 +33,9 @@
           <div class="text-4xl">
             {{ stats.positive ? stats.positive.toLocaleString() : '-' }}
           </div>
+          <div class="text-2xl">
+            {{ makePercentage(stats.positive, stats.totalTestResults) }}%
+          </div>
         </div>
       </div>
 
@@ -39,6 +46,9 @@
           </h3>
           <div class="text-4xl">
             {{ stats.negative ? stats.negative.toLocaleString() : '-' }}
+          </div>
+          <div class="text-2xl">
+            {{ makePercentage(stats.negative, stats.totalTestResults) }}%
           </div>
         </div>
       </div>
@@ -55,6 +65,9 @@
                 : '-'
             }}
           </div>
+          <div class="text-2xl">
+            -
+          </div>
         </div>
       </div>
 
@@ -66,6 +79,9 @@
           <div class="text-4xl">
             {{ stats.death ? stats.death.toLocaleString() : '-' }}
           </div>
+          <div class="text-2xl">
+            {{ makePercentage(stats.death, stats.totalTestResults) }}%
+          </div>
         </div>
       </div>
 
@@ -76,6 +92,9 @@
           </h3>
           <div class="text-4xl">
             {{ stats.hospitalized ? stats.hospitalized.toLocaleString() : '-' }}
+          </div>
+          <div class="text-2xl">
+            {{ makePercentage(stats.hospitalized, stats.totalTestResults) }}%
           </div>
         </div>
       </div>
@@ -93,7 +112,7 @@
     <h3>Daily</h3>
 
     <div v-for="stat in dailyStats" :key="stat.date">
-      <h4>{{ makeDate(stat.date) }}</h4>
+      <h4>{{ format(makeISODate(stat.date), dailyDateFormat) }}</h4>
 
       <p>
         Last checked:
@@ -109,6 +128,9 @@
             <div class="text-4xl">
               {{ stat.positive ? stat.positive.toLocaleString() : '-' }}
             </div>
+            <div class="text-2xl">
+              {{ makePercentage(stat.positive, stats.totalTestResults) }}%
+            </div>
           </div>
         </div>
 
@@ -119,6 +141,9 @@
             </h3>
             <div class="text-4xl">
               {{ stat.negative ? stat.negative.toLocaleString() : '-' }}
+            </div>
+            <div class="text-2xl">
+              {{ makePercentage(stat.negative, stats.totalTestResults) }}%
             </div>
           </div>
         </div>
@@ -135,6 +160,9 @@
                   : '-'
               }}
             </div>
+            <div class="text-2xl">
+              -%
+            </div>
           </div>
         </div>
 
@@ -146,6 +174,9 @@
             <div class="text-4xl">
               {{ stat.death ? stat.death.toLocaleString() : '-' }}
             </div>
+            <div class="text-2xl">
+              {{ makePercentage(stat.death, stats.totalTestResults) }}%
+            </div>
           </div>
         </div>
 
@@ -156,6 +187,9 @@
             </h3>
             <div class="text-4xl">
               {{ stat.hospitalized ? stat.hospitalized.toLocaleString() : '-' }}
+            </div>
+            <div class="text-2xl">
+              {{ makePercentage(stat.hospitalized, stats.totalTestResults) }}%
             </div>
           </div>
         </div>
@@ -177,19 +211,23 @@ export default {
     const { data: stats } = await axios.get(
       `https://covidtracking.com/api/states?state=${params.state}`
     )
+    const { data: info } = await axios.get(
+      `https://covidtracking.com/api/states/info?state=${params.state}`
+    )
     const { data: dailyStats } = await axios.get(
       `https://covidtracking.com/api/states/daily?state=${params.state}`
     )
 
     return {
       dailyStats,
-      state: params.state,
-      stats
+      stats,
+      info
     }
   },
   data() {
     return {
       dateFormat: 'MM/dd/yyyy p',
+      dailyDateFormat: 'MMMM d, yyyy',
       format
     }
   },
@@ -269,6 +307,8 @@ export default {
       })
     },
     makeISODate(date) {
+      if (!date) return 'Unknown Date'
+
       const dateAsString = date.toString()
 
       // YYYYMMDD to YYYY-MM-DD
@@ -280,21 +320,15 @@ export default {
         0
       )
     },
-    makeDate(date) {
-      if (!date) return 'Unknown Date'
+    makePercentage(top, bottom) {
+      if (!top || !bottom) return '-'
 
-      const dateAsString = date.toString()
-
-      // YYYYMMDD
-      return `${dateAsString.substring(4, 6)}-${dateAsString.substring(
-        6,
-        8
-      )}-${dateAsString.substring(0, 4)}`
+      return ((top / bottom) * 100).toFixed(2)
     }
   },
   head() {
     return {
-      title: this.state
+      title: this.info.name
     }
   }
 }
