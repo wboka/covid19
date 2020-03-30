@@ -6,7 +6,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate: `%s - ${process.env.npm_package_name || ''}`,
+    titleTemplate: `%s | ${process.env.npm_package_name || ''}`,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -22,13 +22,17 @@ export default {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=Titillium+Web|Source+Sans+Pro&display=swap'
+      },
+      {
+        rel: 'shortcut icon',
+        href: '/favicon.ico'
       }
     ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#2a4365' },
   /*
    ** Global CSS
    */

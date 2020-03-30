@@ -129,7 +129,7 @@
               {{ stat.positive ? stat.positive.toLocaleString() : '-' }}
             </div>
             <div class="text-2xl">
-              {{ makePercentage(stat.positive, stats.totalTestResults) }}%
+              {{ makePercentage(stat.positive, stat.totalTestResults) }}%
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@
               {{ stat.negative ? stat.negative.toLocaleString() : '-' }}
             </div>
             <div class="text-2xl">
-              {{ makePercentage(stat.negative, stats.totalTestResults) }}%
+              {{ makePercentage(stat.negative, stat.totalTestResults) }}%
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@
               {{ stat.death ? stat.death.toLocaleString() : '-' }}
             </div>
             <div class="text-2xl">
-              {{ makePercentage(stat.death, stats.totalTestResults) }}%
+              {{ makePercentage(stat.death, stat.totalTestResults) }}%
             </div>
           </div>
         </div>
@@ -189,7 +189,7 @@
               {{ stat.hospitalized ? stat.hospitalized.toLocaleString() : '-' }}
             </div>
             <div class="text-2xl">
-              {{ makePercentage(stat.hospitalized, stats.totalTestResults) }}%
+              {{ makePercentage(stat.hospitalized, stat.totalTestResults) }}%
             </div>
           </div>
         </div>
