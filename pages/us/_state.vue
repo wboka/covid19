@@ -101,11 +101,55 @@
     </div>
 
     <div class="flex flex-wrap">
-      <div class="w-full sm:w-1/2">
-        <canvas id="tracking-chart" width="400" height="300"></canvas>
+      <div class="w-full sm:w-1/2 text-center">
+        <button
+          type="button"
+          class="text-white font-bold py-2 px-4 m-4 rounded-full"
+          :class="{
+            'bg-teal-700 hover:bg-teal-500': showCaseData,
+            'bg-blue-700 hover:bg-blue-500': !showCaseData
+          }"
+          @click="showCaseData = !showCaseData"
+        >
+          Show {{ showCaseData ? 'Daily Changes' : ' Patient Data' }}
+        </button>
+        <canvas
+          v-show="showCaseData"
+          id="tracking-chart"
+          width="400"
+          height="300"
+        ></canvas>
+        <canvas
+          v-show="!showCaseData"
+          id="tracking-increases-chart"
+          width="400"
+          height="300"
+        ></canvas>
       </div>
-      <div class="w-full sm:w-1/2">
-        <canvas id="care-chart" width="400" height="300"></canvas>
+      <div class="w-full sm:w-1/2 text-center">
+        <button
+          type="button"
+          class="text-white font-bold py-2 px-4 m-4 rounded-full"
+          :class="{
+            'bg-teal-700 hover:bg-teal-500': showPatientData,
+            'bg-blue-700 hover:bg-blue-500': !showPatientData
+          }"
+          @click="showPatientData = !showPatientData"
+        >
+          Show {{ showPatientData ? 'Daily Changes' : ' Patient Data' }}
+        </button>
+        <canvas
+          v-show="showPatientData"
+          id="care-chart"
+          width="400"
+          height="300"
+        ></canvas>
+        <canvas
+          v-show="!showPatientData"
+          id="care-increases-chart"
+          width="400"
+          height="300"
+        ></canvas>
       </div>
     </div>
 
@@ -228,7 +272,9 @@ export default {
     return {
       dateFormat: 'MM/dd/yyyy p',
       dailyDateFormat: 'MMMM d, yyyy',
-      format
+      format,
+      showCaseData: true,
+      showPatientData: true
     }
   },
   mounted() {
@@ -249,6 +295,28 @@ export default {
         backgroundColor: '#2a4365aa'
       }
     ])
+    this.createChart(
+      'tracking-increases-chart',
+      'line',
+      'COVID-19 Cases Reported (Daily Changes)',
+      [
+        {
+          label: 'Positive',
+          data: this.getChartData('positiveIncrease'),
+          backgroundColor: '#22543daa'
+        },
+        {
+          label: 'Negative',
+          data: this.getChartData('negativeIncrease'),
+          backgroundColor: '#9b2c2caa'
+        },
+        {
+          label: 'Total',
+          data: this.getChartData('totalTestResultsIncrease'),
+          backgroundColor: '#2a4365aa'
+        }
+      ]
+    )
     this.createChart('care-chart', 'line', 'COVID-19 Patients', [
       {
         label: 'Death',
@@ -261,6 +329,23 @@ export default {
         backgroundColor: '#3182ceaa'
       }
     ])
+    this.createChart(
+      'care-increases-chart',
+      'line',
+      'COVID-19 Patients (Daily Changes)',
+      [
+        {
+          label: 'Death',
+          data: this.getChartData('deathIncrease'),
+          backgroundColor: '#000000aa'
+        },
+        {
+          label: 'Hospitalized',
+          data: this.getChartData('hospitalizedIncrease'),
+          backgroundColor: '#3182ceaa'
+        }
+      ]
+    )
   },
   methods: {
     createChart(chartID, chartType, title, datasets) {
@@ -272,13 +357,15 @@ export default {
           datasets
         },
         options: {
-          title: {
-            display: true,
-            text: title
-          },
           scales: {
             xAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Date',
+                  fontStyle: 'bold',
+                  fontSize: 16
+                },
                 type: 'time',
                 time: {
                   unit: 'day'
@@ -287,11 +374,30 @@ export default {
             ],
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Cases',
+                  fontStyle: 'bold',
+                  fontSize: 16
+                },
                 ticks: {
                   beginAtZero: true
                 }
               }
             ]
+          },
+          title: {
+            display: true,
+            text: title,
+            fontSize: 18
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: false
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true
           }
         }
       })

@@ -81,11 +81,55 @@
     </div>
 
     <div class="flex flex-wrap">
-      <div class="w-full sm:w-1/2">
-        <canvas id="tracking-chart" width="400" height="300"></canvas>
+      <div class="w-full sm:w-1/2 text-center">
+        <button
+          type="button"
+          class="text-white font-bold py-2 px-4 m-4 rounded-full"
+          :class="{
+            'bg-teal-700 hover:bg-teal-500': showCaseData,
+            'bg-blue-700 hover:bg-blue-500': !showCaseData
+          }"
+          @click="showCaseData = !showCaseData"
+        >
+          Show {{ showCaseData ? 'Daily Changes' : ' Case Data' }}
+        </button>
+        <canvas
+          v-show="showCaseData"
+          id="tracking-chart"
+          width="400"
+          height="300"
+        ></canvas>
+        <canvas
+          v-show="!showCaseData"
+          id="tracking-increases-chart"
+          width="400"
+          height="300"
+        ></canvas>
       </div>
-      <div class="w-full sm:w-1/2">
-        <canvas id="care-chart" width="400" height="300"></canvas>
+      <div class="w-full sm:w-1/2 text-center">
+        <button
+          type="button"
+          class="text-white font-bold py-2 px-4 m-4 rounded-full"
+          :class="{
+            'bg-teal-700 hover:bg-teal-500': showPatientData,
+            'bg-blue-700 hover:bg-blue-500': !showPatientData
+          }"
+          @click="showPatientData = !showPatientData"
+        >
+          Show {{ showPatientData ? 'Daily Changes' : ' Patient Data' }}
+        </button>
+        <canvas
+          v-show="showPatientData"
+          id="care-chart"
+          width="400"
+          height="300"
+        ></canvas>
+        <canvas
+          v-show="!showPatientData"
+          id="care-increases-chart"
+          width="400"
+          height="300"
+        ></canvas>
       </div>
     </div>
 
@@ -94,8 +138,8 @@
         type="button"
         class="text-white font-bold py-2 px-4 m-4 rounded-full"
         :class="{
-          'bg-green-500 hover:bg-green-700': !showDailyStats,
-          'bg-red-500 hover:bg-red-700': showDailyStats
+          'bg-green-700 hover:bg-green-500': !showDailyStats,
+          'bg-red-700 hover:bg-red-500': showDailyStats
         }"
         @click="showDailyStats = !showDailyStats"
       >
@@ -265,7 +309,9 @@ export default {
       dateFormat: 'MM/dd/yyyy p',
       dailyDateFormat: 'MMMM d, yyyy',
       format,
+      showCaseData: true,
       showDailyStats: false,
+      showPatientData: true,
       stateFilter: ''
     }
   },
@@ -296,6 +342,28 @@ export default {
         backgroundColor: '#2a4365aa'
       }
     ])
+    this.createChart(
+      'tracking-increases-chart',
+      'line',
+      'COVID-19 Cases Reported',
+      [
+        {
+          label: 'Positive',
+          data: this.getChartData('positiveIncrease'),
+          backgroundColor: '#22543daa'
+        },
+        {
+          label: 'Negative',
+          data: this.getChartData('negativeIncrease'),
+          backgroundColor: '#9b2c2caa'
+        },
+        {
+          label: 'Total',
+          data: this.getChartData('totalTestResultsIncrease'),
+          backgroundColor: '#2a4365aa'
+        }
+      ]
+    )
     this.createChart('care-chart', 'line', 'COVID-19 Patients', [
       {
         label: 'Death',
@@ -305,6 +373,18 @@ export default {
       {
         label: 'Hospitalized',
         data: this.getChartData('hospitalized'),
+        backgroundColor: '#3182ceaa'
+      }
+    ])
+    this.createChart('care-increases-chart', 'line', 'COVID-19 Patients', [
+      {
+        label: 'Death',
+        data: this.getChartData('deathIncrease'),
+        backgroundColor: '#000000aa'
+      },
+      {
+        label: 'Hospitalized',
+        data: this.getChartData('hospitalizedIncrease'),
         backgroundColor: '#3182ceaa'
       }
     ])
