@@ -22,11 +22,11 @@ h6 {
   @apply font-bold;
 }
 a {
-  @apply text-blue-600 underline;
+  @apply text-blue-800 underline;
 }
 
 a:hover {
-  @apply text-white bg-blue-600;
+  @apply text-white bg-blue-800;
 }
 
 hr {
@@ -34,7 +34,7 @@ hr {
 }
 
 .state-link {
-  @apply bg-orange-200 text-black border-2 border-orange-200 p-4 rounded-lg m-4 shadow-lg block no-underline;
+  @apply text-center bg-orange-200 text-black border-2 border-orange-200 p-4 rounded-lg m-4 shadow-lg block no-underline;
 }
 
 .state-link:hover {

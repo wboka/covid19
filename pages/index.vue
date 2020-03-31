@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Available Countries</h2>
+    <h2 class="text-center">Available Countries</h2>
 
     <div class="flex flex-wrap">
       <div

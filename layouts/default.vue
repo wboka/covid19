@@ -10,10 +10,24 @@
 
     <hr />
 
-    <p class="text-center">
-      <a href="https://covidtracking.com/" target="_blank" rel="noopener"
-        >Data from <strong>The COVID Tracking Project</strong>.</a
+    <p class="text-center text-lg my-4">
+      Web development by
+      <a href="https://wayneboka.com/" target="_blank" rel="noopener"
+        ><strong>Wayne Boka</strong></a
       >
+    </p>
+
+    <p class="text-center text-lg my-4">
+      Data from
+      <a href="https://covidtracking.com/" target="_blank" rel="noopener"
+        ><strong>The COVID Tracking Project</strong></a
+      >
+    </p>
+
+    <hr />
+
+    <p class="text-center text-lg my-4">
+      Copyright &copy; 2020. Wayne Boka. All rights reserved.
     </p>
   </div>
 </template>
