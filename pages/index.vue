@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: 'DashboardCovid19',
   data() {
     return {
       countries: [

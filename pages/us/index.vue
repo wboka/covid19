@@ -6,79 +6,13 @@
       Percentages calculated from total test results
     </p>
 
-    <div class="flex flex-wrap text-center">
-      <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
-        <div class="m-2 text-white bg-green-900 shadow-lg">
-          <h3>
-            Positive Tests
-          </h3>
-          <div class="text-4xl">
-            {{ stats.positive.toLocaleString() }}
-          </div>
-          <div class="text-2xl">
-            {{ ((stats.positive / stats.totalTestResults) * 100).toFixed(2) }}%
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
-        <div class="m-2 text-white bg-red-800 shadow-lg">
-          <h3>
-            Negative Tests
-          </h3>
-          <div class="text-4xl">
-            {{ stats.negative.toLocaleString() }}
-          </div>
-          <div class="text-2xl">
-            {{ ((stats.negative / stats.totalTestResults) * 100).toFixed(2) }}%
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
-        <div class="m-2 text-white bg-blue-900 shadow-lg">
-          <h3>
-            Total Tests
-          </h3>
-          <div class="text-4xl">
-            {{ stats.totalTestResults.toLocaleString() }}
-          </div>
-          <div class="text-2xl">
-            -
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/5">
-        <div class="m-2 text-white bg-black shadow-lg">
-          <h3>
-            Deaths
-          </h3>
-          <div class="text-4xl">
-            {{ stats.death.toLocaleString() }}
-          </div>
-          <div class="text-2xl">
-            {{ ((stats.death / stats.totalTestResults) * 100).toFixed(2) }}%
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/5">
-        <div class="m-2 text-white bg-blue-600 shadow-lg">
-          <h3>
-            Hospitalized
-          </h3>
-          <div class="text-4xl">
-            {{ stats.hospitalized.toLocaleString() }}
-          </div>
-          <div class="text-2xl">
-            {{
-              ((stats.hospitalized / stats.totalTestResults) * 100).toFixed(2)
-            }}%
-          </div>
-        </div>
-      </div>
-    </div>
+    <Stats
+      :deaths="stats.death"
+      :hospitalized="stats.hospitalized"
+      :negative="stats.negative"
+      :positive="stats.positive"
+      :total="stats.totalTestResults"
+    />
 
     <div class="flex flex-wrap">
       <div class="w-full sm:w-1/2 text-center">
@@ -158,83 +92,13 @@
           <em>{{ format(new Date(stat.dateChecked), dateFormat) }}</em>
         </p>
 
-        <div class="flex flex-wrap text-center">
-          <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
-            <div class="m-2 text-white bg-green-900 shadow-lg">
-              <h3>
-                Positive Tests
-              </h3>
-              <div class="text-4xl">
-                {{ stat.positive ? stat.positive.toLocaleString() : '-' }}
-              </div>
-              <div class="text-2xl">
-                {{ makePercentage(stat.positive, stat.totalTestResults) }}%
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
-            <div class="m-2 text-white bg-red-800 shadow-lg">
-              <h3>
-                Negative Tests
-              </h3>
-              <div class="text-4xl">
-                {{ stat.negative ? stat.negative.toLocaleString() : '-' }}
-              </div>
-              <div class="text-2xl">
-                {{ makePercentage(stat.negative, stat.totalTestResults) }}%
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/5">
-            <div class="m-2 text-white bg-blue-900 shadow-lg">
-              <h3>
-                Total Tests
-              </h3>
-              <div class="text-4xl">
-                {{
-                  stat.totalTestResults
-                    ? stat.totalTestResults.toLocaleString()
-                    : '-'
-                }}
-              </div>
-              <div class="text-2xl">
-                -%
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/5">
-            <div class="m-2 text-white bg-black shadow-lg">
-              <h3>
-                Deaths
-              </h3>
-              <div class="text-4xl">
-                {{ stat.death ? stat.death.toLocaleString() : '-' }}
-              </div>
-              <div class="text-2xl">
-                {{ makePercentage(stat.death, stat.totalTestResults) }}%
-              </div>
-            </div>
-          </div>
-
-          <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/5">
-            <div class="m-2 text-white bg-blue-600 shadow-lg">
-              <h3>
-                Hospitalized
-              </h3>
-              <div class="text-4xl">
-                {{
-                  stat.hospitalized ? stat.hospitalized.toLocaleString() : '-'
-                }}
-              </div>
-              <div class="text-2xl">
-                {{ makePercentage(stat.hospitalized, stat.totalTestResults) }}%
-              </div>
-            </div>
-          </div>
-        </div>
+        <Stats
+          :deaths="stat.death"
+          :hospitalized="stat.hospitalized"
+          :negative="stat.negative"
+          :positive="stat.positive"
+          :total="stat.totalTestResults"
+        />
 
         <hr />
       </div>
@@ -277,8 +141,13 @@ import axios from 'axios'
 import Chart from 'chart.js'
 import { format } from 'date-fns'
 
+import Stats from '~/components/statsSummary'
+
 export default {
   name: 'USDashboard',
+  components: {
+    Stats
+  },
   async asyncData({ params }) {
     const { data: availableStates } = await axios.get(
       'https://covidtracking.com/api/states/info'
@@ -399,13 +268,15 @@ export default {
           datasets
         },
         options: {
-          title: {
-            display: true,
-            text: title
-          },
           scales: {
             xAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Date',
+                  fontStyle: 'bold',
+                  fontSize: 16
+                },
                 type: 'time',
                 time: {
                   unit: 'day'
@@ -414,11 +285,30 @@ export default {
             ],
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Cases',
+                  fontStyle: 'bold',
+                  fontSize: 16
+                },
                 ticks: {
                   beginAtZero: true
                 }
               }
             ]
+          },
+          title: {
+            display: true,
+            text: title,
+            fontSize: 18
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: false
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true
           }
         }
       })
