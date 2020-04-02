@@ -20,7 +20,7 @@
       <h3>Data Quality - {{ stats.grade ? stats.grade : 'NA' }}</h3>
 
       <p class="text-gray-700 text-center">
-        Percentages calculated from total test results
+        Positive &amp; negative percentages calculated from total test results
       </p>
 
       <p class="text-center">

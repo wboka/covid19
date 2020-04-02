@@ -3,7 +3,7 @@
     <h2 class="text-center">United States of America</h2>
 
     <p class="text-gray-700 text-center">
-      Percentages calculated from total test results
+      Positive &amp; negative percentages calculated from total test results
     </p>
 
     <p class="text-center">

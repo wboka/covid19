@@ -134,7 +134,7 @@ export default {
     return {
       dateFormat: 'MMMM dd, yyyy p',
       format,
-      showPercentFromTotal: true
+      showPercentFromTotal: false
     }
   }
 }
