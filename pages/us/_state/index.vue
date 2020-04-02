@@ -19,8 +19,14 @@
 
       <h3>Data Quality - {{ stats.grade ? stats.grade : 'NA' }}</h3>
 
-      <p class="text-gray-600 text-center">
+      <p class="text-gray-700 text-center">
         Percentages calculated from total test results
+      </p>
+
+      <p class="text-center">
+        <nuxt-link :to="'/us/' + stats.state + '/fallen'"
+          >Visit the Tribute to the Fallen</nuxt-link
+        >
       </p>
     </div>
 

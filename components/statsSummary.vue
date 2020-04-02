@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="w-full sm:w-1/2 lg:w-1/5">
-        <div class="m-2 text-white bg-blue-600 shadow-lg">
+        <div class="m-2 text-white bg-blue-700 shadow-lg">
           <h3>
             Hospitalized
           </h3>

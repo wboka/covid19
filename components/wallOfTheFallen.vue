@@ -1,6 +1,6 @@
 <template>
   <div class="wall-of-the-fallen">
-    <h1 class="text-center">The Virtual Wall of the Fallen</h1>
+    <h1 class="text-center">{{ state }} Wall of the Fallen</h1>
 
     <h2 class="text-center">{{ deaths ? deaths.toLocaleString() : 0 }}</h2>
 
@@ -20,6 +20,10 @@ export default {
     deaths: {
       type: Number,
       default: 100
+    },
+    state: {
+      type: String,
+      default: null
     }
   }
 }

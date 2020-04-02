@@ -2,7 +2,7 @@
   <div>
     <h2 class="text-center">United States of America</h2>
 
-    <p class="text-gray-600 text-center">
+    <p class="text-gray-700 text-center">
       Percentages calculated from total test results
     </p>
 

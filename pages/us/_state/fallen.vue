@@ -2,7 +2,7 @@
   <div>
     <nuxt-link to="/us" class="state-link">United States of America</nuxt-link>
 
-    <Wall :deaths="stats.death" state="USA" />
+    <Wall :deaths="stats.death" :state="stats.state" />
   </div>
 </template>
 
@@ -16,11 +16,18 @@ export default {
   components: {
     Wall
   },
-  async asyncData() {
-    const { data: stats } = await axios.get('https://covidtracking.com/api/us')
+  async asyncData({ params }) {
+    const { data: stats } = await axios.get(
+      `https://covidtracking.com/api/states?state=${params.state}`
+    )
 
     return {
-      stats: stats[0]
+      stats
+    }
+  },
+  head() {
+    return {
+      title: `${this.stats.state} Wall of the Fallen`
     }
   }
 }
