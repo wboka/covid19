@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default {
-  mode: 'universal',
+  mode: 'spa',
   head: {
     titleTemplate: `%s | ${process.env.npm_package_name || ''}`,
     meta: [
