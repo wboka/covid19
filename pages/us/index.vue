@@ -6,6 +6,10 @@
       Percentages calculated from total test results
     </p>
 
+    <p class="text-center">
+      <nuxt-link to="/us/fallen">Visit the Tribute to the Fallen</nuxt-link>
+    </p>
+
     <Stats
       :deaths="stats.death"
       :hospitalized="stats.hospitalized"
