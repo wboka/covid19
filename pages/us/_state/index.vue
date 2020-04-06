@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="text-center">
-      <nuxt-link to="/us" class="state-link"
-        >United States of America</nuxt-link
-      >
+      <nuxt-link to="/" class="state-link">United States of America</nuxt-link>
 
       <h2>{{ info.name }}</h2>
 

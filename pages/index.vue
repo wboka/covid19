@@ -3,7 +3,7 @@
     <h2 class="text-center">United States of America</h2>
 
     <p class="text-center">
-      <nuxt-link to="/us/fallen">Visit the Tribute to the Fallen</nuxt-link>
+      <nuxt-link to="/fallen">Visit the Tribute to the Fallen</nuxt-link>
     </p>
 
     <p class="text-center">

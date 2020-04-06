@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt-link to="/us" class="state-link">United States of America</nuxt-link>
+    <nuxt-link to="/" class="state-link">United States of America</nuxt-link>
 
     <Wall :deaths="stats.death" :state="stats.state" />
   </div>
