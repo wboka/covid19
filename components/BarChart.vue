@@ -35,8 +35,6 @@ export default {
   },
   methods: {
     createChart(chartID, chartType, title, datasets) {
-      // eslint-disable-next-line
-      console.log(arguments)
       const ctx = document.getElementById(chartID)
       // eslint-disable-next-line
       const chart = new Chart(ctx, {
