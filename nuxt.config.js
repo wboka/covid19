@@ -1,5 +1,23 @@
 import axios from 'axios'
 
+const dyanamicRoutes = async () => {
+  const { data: states } = await axios.get(
+    'https://covidtracking.com/api/states/info'
+  )
+
+  const allStates = states.map((state) => {
+    return `/us/${state.state}`
+  })
+  const allStatesFallen = states.map((state) => {
+    return `/us/${state.state}/fallen`
+  })
+
+  return [
+    ...allStates,
+    ...allStatesFallen
+  ]
+}
+
 export default {
   mode: 'spa',
   head: {
@@ -36,15 +54,7 @@ export default {
     extend(config, ctx) {}
   },
   generate: {
-    routes() {
-      return axios
-        .get('https://covidtracking.com/api/states/info')
-        .then((result) => {
-          return result.data.map((state) => {
-            return '/us/' + state.state
-          })
-        })
-    }
+    routes: dyanamicRoutes
   }
   // router: {
   //   middleware: 'stats'
