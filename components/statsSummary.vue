@@ -1,7 +1,10 @@
 <template>
   <div class="stats">
     <div class="flex flex-wrap text-center">
-      <div class="w-full sm:w-1/3">
+      <div
+        class="w-full sm:w-1/2"
+        :class="{ 'lg:w-1/5': isState, 'lg:w-1/4': !isState }"
+      >
         <div class="m-2 text-white bg-green-900 shadow-lg">
           <h3>
             Positive Tests
@@ -16,7 +19,10 @@
         </div>
       </div>
 
-      <div class="w-full sm:w-1/3">
+      <div
+        class="w-full sm:w-1/2"
+        :class="{ 'lg:w-1/5': isState, 'lg:w-1/4': !isState }"
+      >
         <div class="m-2 text-white bg-red-800 shadow-lg">
           <h3>
             Negative Tests
@@ -31,7 +37,10 @@
         </div>
       </div>
 
-      <div class="w-full sm:w-1/3">
+      <div
+        class="w-full sm:w-1/2"
+        :class="{ 'lg:w-1/5': isState, 'lg:w-1/4': !isState }"
+      >
         <div class="m-2 text-white bg-blue-900 shadow-lg">
           <h3>
             Total Tests
@@ -45,7 +54,10 @@
         </div>
       </div>
 
-      <div class="w-full sm:w-1/2 lg:w-1/4">
+      <div
+        class="w-full sm:w-1/2"
+        :class="{ 'lg:w-1/5': isState, 'lg:w-1/4': !isState }"
+      >
         <div class="m-2 text-white bg-black shadow-lg">
           <h3>
             Deaths
@@ -66,7 +78,11 @@
           </div>
         </div>
       </div>
-      <div class="w-full sm:w-1/2 lg:w-1/4">
+      <div
+        v-if="isState"
+        class="w-full sm:w-1/2"
+        :class="{ 'lg:w-1/5': isState, 'lg:w-1/4': !isState }"
+      >
         <div class="m-2 text-white bg-blue-700 shadow-lg">
           <h3>
             Hospitalized
@@ -84,34 +100,6 @@
             <span class="label"
               >of {{ showPercentFromTotal ? 'total' : 'positive' }} tests</span
             >
-          </div>
-        </div>
-      </div>
-      <div class="w-full sm:w-1/2 lg:w-1/4">
-        <div class="m-2 text-white bg-orange-700 shadow-lg">
-          <h3>
-            In ICU
-          </h3>
-          <div class="text-4xl">
-            {{ inIcu ? inIcu.toLocaleString() : '-' }}
-          </div>
-          <div class="text-2xl">
-            {{ ((inIcu / hospitalized) * 100).toFixed(2) }}%
-            <span class="label">of hospitalized cases</span>
-          </div>
-        </div>
-      </div>
-      <div class="w-full sm:w-1/2 lg:w-1/4">
-        <div class="m-2 text-white bg-purple-700 shadow-lg">
-          <h3>
-            On Ventilator
-          </h3>
-          <div class="text-4xl">
-            {{ onVentilator ? onVentilator.toLocaleString() : '-' }}
-          </div>
-          <div class="text-2xl">
-            {{ ((onVentilator / hospitalized) * 100).toFixed(2) }}%
-            <span class="label">of hospitalized cases</span>
           </div>
         </div>
       </div>
@@ -136,14 +124,6 @@ export default {
       type: Number,
       default: 0
     },
-    inIcu: {
-      type: Number,
-      default: 0
-    },
-    onVentilator: {
-      type: Number,
-      default: 0
-    },
     negative: {
       type: Number,
       default: 0
@@ -153,6 +133,10 @@ export default {
       default: 0
     },
     showPercentFromTotal: {
+      type: Boolean,
+      default: false
+    },
+    isState: {
       type: Boolean,
       default: false
     }

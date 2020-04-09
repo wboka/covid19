@@ -42,16 +42,15 @@
     <Stats
       :deaths="stats.death"
       :hospitalized="stats.hospitalized"
-      :in-icu="stats.inIcuCumulative"
       :negative="stats.negative"
-      :on-ventilator="stats.onVentilatorCumulative"
       :positive="stats.positive"
       :show-percent-from-total="showPercentFromTotal"
       :total="stats.totalTestResults"
+      :is-state="true"
     />
 
     <div class="flex flex-wrap">
-      <div class="w-full lg:w-1/3 text-center">
+      <div class="w-full md:w-1/2 text-center">
         <button
           type="button"
           class="text-white font-bold py-2 px-4 m-4 rounded-full"
@@ -110,7 +109,7 @@
           ]"
         />
       </div>
-      <div class="w-full md:w-1/2 lg:w-1/3 text-center">
+      <div class="w-full md:w-1/2 text-center">
         <button
           type="button"
           class="text-white font-bold py-2 px-4 m-4 rounded-full"
@@ -135,7 +134,7 @@
             },
             {
               label: 'Hospitalized',
-              data: getChartData('hospitalizedCurrently'),
+              data: getChartData('hospitalized'),
               backgroundColor: '#3182ceaa'
             }
           ]"
@@ -159,55 +158,6 @@
           ]"
         />
       </div>
-      <div class="w-full md:w-1/2 lg:w-1/3 text-center">
-        <button
-          type="button"
-          class="text-white font-bold py-2 px-4 m-4 rounded-full"
-          :class="{
-            'bg-teal-700 hover:bg-teal-500': showICUData,
-            'bg-blue-700 hover:bg-blue-500': !showICUData
-          }"
-          @click="showICUData = !showICUData"
-        >
-          Show {{ showICUData ? 'Daily' : 'Cumulative' }} Data
-        </button>
-        <BarChart
-          v-show="showICUData"
-          :id="'icu-chart'"
-          :chart-type="'line'"
-          :title="'COVID-19 ICU Patients'"
-          :datasets="[
-            {
-              label: 'In ICU',
-              data: getChartData('inIcuCumulative'),
-              backgroundColor: '#c05621aa'
-            },
-            {
-              label: 'On Ventilator',
-              data: getChartData('onVentilatorCumulative'),
-              backgroundColor: '#6b46c1aa'
-            }
-          ]"
-        />
-        <BarChart
-          v-show="!showICUData"
-          :id="'icu-cumulative-chart'"
-          :chart-type="'line'"
-          :title="'COVID-19 ICU Patients (Daily Cases)'"
-          :datasets="[
-            {
-              label: 'In ICU',
-              data: getChartData('inIcuCurrently'),
-              backgroundColor: '#c05621aa'
-            },
-            {
-              label: 'On Ventilator',
-              data: getChartData('onVentilatorCurrently'),
-              backgroundColor: '#6b46c1aa'
-            }
-          ]"
-        />
-      </div>
     </div>
 
     <h3>Daily</h3>
@@ -223,12 +173,11 @@
       <Stats
         :deaths="stat.death"
         :hospitalized="stat.hospitalized"
-        :in-icu="stat.inIcuCurrently"
         :negative="stat.negative"
-        :on-ventilator="stat.onVentilatorCurrently"
         :positive="stat.positive"
         :show-percent-from-total="showPercentFromTotal"
         :total="stat.totalTestResults"
+        :is-state="true"
       />
 
       <hr />
@@ -273,7 +222,6 @@ export default {
       format,
       showCaseData: true,
       showPatientData: true,
-      showICUData: true,
       showPercentFromTotal: false
     }
   },
