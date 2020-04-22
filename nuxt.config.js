@@ -12,10 +12,7 @@ const dyanamicRoutes = async () => {
     return `/us/${state.state}/fallen`
   })
 
-  return [
-    ...allStates,
-    ...allStatesFallen
-  ]
+  return [...allStates, ...allStatesFallen]
 }
 
 export default {
@@ -47,16 +44,23 @@ export default {
   loading: { color: '#2a4365' },
   css: [],
   plugins: [],
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
+  buildModules: [
+    '@nuxtjs/dotenv',
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss'
+  ],
   modules: ['@nuxtjs/axios', '@nuxtjs/pwa'],
   axios: {},
+  env: {
+    MONGO_URI: process.env.MONGO_URI
+  },
   build: {
     extend(config, ctx) {}
   },
   generate: {
     routes: dyanamicRoutes
+  },
+  router: {
+    middleware: ['pageHit']
   }
-  // router: {
-  //   middleware: 'stats'
-  // }
 }
