@@ -48,6 +48,16 @@ const PageHit = mongoose.model('PageHit', PageHitSchema)
 
 module.exports = (req, res) => {
   if (req.method.toLowerCase() === 'post') {
+    if (
+      ['localhost:3000', 'trackcovid19.now.sh'].indexOf(req.body.host) === -1
+    ) {
+      res.status(400).json({
+        "error": `Invalid host: ${req.body.host}`
+      })
+
+      return false
+    }
+
     const pageDetails = new PageHit(req.body)
 
     PageHit.create(pageDetails, (error, pageHit) => {

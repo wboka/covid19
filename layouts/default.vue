@@ -11,6 +11,12 @@
     <hr />
 
     <p class="text-center text-lg my-4">
+      <nuxt-link to="/stats">
+        <strong>View Website Stats</strong>
+      </nuxt-link>
+    </p>
+
+    <p class="text-center text-lg my-4">
       Web development by
       <a href="https://wayneboka.com/" target="_blank" rel="noopener"
         ><strong>Wayne Boka</strong></a
