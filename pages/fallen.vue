@@ -17,7 +17,9 @@ export default {
     Wall
   },
   async asyncData() {
-    const { data: stats } = await axios.get('https://covidtracking.com/api/us')
+    const { data: stats } = await axios.get(
+      'https://covidtracking.com/api/v1/us'
+    )
 
     return {
       stats: stats[0]

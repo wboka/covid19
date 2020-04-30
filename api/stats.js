@@ -48,11 +48,9 @@ const PageHit = mongoose.model('PageHit', PageHitSchema)
 
 module.exports = (req, res) => {
   if (req.method.toLowerCase() === 'post') {
-    if (
-      ['localhost:3000', 'trackcovid19.now.sh'].indexOf(req.body.host) === -1
-    ) {
+    if (!['localhost:3000', 'trackcovid19.now.sh'].includes(req.body.host)) {
       res.status(400).json({
-        "error": `Invalid host: ${req.body.host}`
+        error: `Invalid host: ${req.body.host}`
       })
 
       return false

@@ -200,13 +200,13 @@ export default {
   },
   async asyncData({ params }) {
     const { data: stats } = await axios.get(
-      `https://covidtracking.com/api/states.json?state=${params.state}`
+      `https://covidtracking.com/api/v1/states.json?state=${params.state}`
     )
     const { data: info } = await axios.get(
-      `https://covidtracking.com/api/states/info.json?state=${params.state}`
+      `https://covidtracking.com/api/v1/states/info.json?state=${params.state}`
     )
     const { data: dailyStats } = await axios.get(
-      `https://covidtracking.com/api/states/daily.json?state=${params.state}`
+      `https://covidtracking.com/api/v1/states/daily.json?state=${params.state}`
     )
 
     return {

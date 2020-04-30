@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const dyanamicRoutes = async () => {
   const { data: states } = await axios.get(
-    'https://covidtracking.com/api/states/info.json'
+    'https://covidtracking.com/api/v1/states/info.json'
   )
 
   const allStates = states.map((state) => {
