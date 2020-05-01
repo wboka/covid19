@@ -13,7 +13,12 @@
 
 <script>
 export default {
-  props: ['error'],
+  props: {
+    error: {
+      type: String,
+      default: null
+    }
+  },
   layout: 'default'
 }
 </script>

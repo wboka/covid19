@@ -217,7 +217,7 @@ export default {
       'https://covidtracking.com/api/v1/states/info.json'
     )
     const { data: stats } = await axios.get(
-      'https://covidtracking.com/api/v1/us.json'
+      'https://covidtracking.com/api/v1/us/current.json'
     )
     const { data: dailyStats } = await axios.get(
       'https://covidtracking.com/api/v1/us/daily.json'

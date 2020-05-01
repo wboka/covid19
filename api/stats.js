@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const pkg = require('../package.json')
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -59,7 +58,7 @@ module.exports = (req, res) => {
     const pageDetails = new PageHit(req.body)
 
     PageHit.create(pageDetails, (error, pageHit) => {
-      if (error) res.send(err)
+      if (error) res.send(error)
 
       res.json(pageHit)
     })
@@ -69,7 +68,7 @@ module.exports = (req, res) => {
     })
       .sort('-when')
       .exec((error, hits) => {
-        if (error) res.send(err)
+        if (error) res.send(error)
 
         res.json(hits)
       })

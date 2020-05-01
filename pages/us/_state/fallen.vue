@@ -18,7 +18,7 @@ export default {
   },
   async asyncData({ params }) {
     const { data: stats } = await axios.get(
-      `https://covidtracking.com/api/v1/states.json?state=${params.state}`
+      `https://covidtracking.com/api/v1/states/${params.state}/current.json`
     )
 
     return {
