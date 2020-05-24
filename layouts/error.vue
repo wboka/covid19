@@ -15,8 +15,10 @@
 export default {
   props: {
     error: {
-      type: String,
-      default: null
+      type: Object,
+      default: {
+        statusCode: 500
+      }
     }
   },
   layout: 'default'
