@@ -6,10 +6,10 @@ const dyanamicRoutes = async () => {
   )
 
   const allStates = states.map((state) => {
-    return `/us/${state.state}`
+    return `/us/${state.state.toLowerCase()}`
   })
   const allStatesFallen = states.map((state) => {
-    return `/us/${state.state}/fallen`
+    return `/us/${state.state.toLowerCase()}/fallen`
   })
 
   return [...allStates, ...allStatesFallen]

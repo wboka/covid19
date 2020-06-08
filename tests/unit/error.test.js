@@ -10,7 +10,7 @@ describe('Error Page', () => {
         }
       },
       stubs: {
-        "NuxtLink": RouterLinkStub
+        NuxtLink: RouterLinkStub
       }
     })
     expect(wrapper.element).toMatchSnapshot()

@@ -13,14 +13,7 @@
 
 <script>
 export default {
-  props: {
-    error: {
-      type: Object,
-      default: {
-        statusCode: 500
-      }
-    }
-  },
+  props: ['error'],
   layout: 'default'
 }
 </script>
