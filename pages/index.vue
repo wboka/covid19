@@ -214,13 +214,13 @@ export default {
   },
   async asyncData({ params }) {
     const { data: availableStates } = await axios.get(
-      'https://covidtracking.com/api/v1/states/info.json'
+      'https://api.covidtracking.com/api/v1/states/info.json'
     )
     const { data: stats } = await axios.get(
-      'https://covidtracking.com/api/v1/us/current.json'
+      'https://api.covidtracking.com/api/v1/us/current.json'
     )
     const { data: dailyStats } = await axios.get(
-      'https://covidtracking.com/api/v1/us/daily.json'
+      'https://api.covidtracking.com/api/v1/us/daily.json'
     )
 
     availableStates.sort((a, b) => {
